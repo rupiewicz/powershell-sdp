@@ -1,3 +1,6 @@
+Dodany został moduł dotyczący obsługi czasu pracy ( dodawania oraz raportowanie czasu pracy )  -
+
+
 # PowerShell Module: ServiceDeskPlus
 PowerShell module focused on manipulating the ManageEngine ServiceDesk Plus API.
 
@@ -5,7 +8,7 @@ PowerShell module focused on manipulating the ManageEngine ServiceDesk Plus API.
 Clone the module into your PowerShell modules directory:
 
 ```powershell
-git clone "https://github.com/devynspencer/powershell-sdp" "$env:USERPROFILE\Documents\WindowsPowerShell\Modules\ServiceDeskPlus"
+git clone "https://github.com/rupiewicz/powershell-sdp" "$env:USERPROFILE\Documents\WindowsPowerShell\Modules\ServiceDeskPlus"
 ```
 
 Alternatively, create a symlink:
