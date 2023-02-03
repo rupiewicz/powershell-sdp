@@ -1,4 +1,4 @@
-Dodany został moduł dotyczący obsługi czasu pracy ( dodawania oraz raportowanie czasu pracy )  -
+Dodany został moduł dotyczący obsługi czasu pracy ( dodawania oraz raportowanie czasu pracy )  - Add TimeSheet module :) 
 
 
 # PowerShell Module: ServiceDeskPlus
