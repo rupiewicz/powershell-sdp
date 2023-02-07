@@ -7,13 +7,13 @@ https://www.manageengine.com/products/service-desk/sdpod-v3-api/requests/request
 Przykładowe zapytania 
 
 ```powershell
-1278, 1279, 1280 |Add-ServiceDeskWorklogs -Hours 1 -Owner rupiewicz # add  1hour to id 
+1278, 1279, 1280 |Add-ServiceDeskWorklogs -Hours 1 -Owner rupiewicz # Dodaj godzine w zgłoszeniach 
 ```
 ```powershell
-Get-ServiceDeskWorklogs -id 1278  |where  Owner  -Like  "*rupiewicz*"  |Sort-Object  -Property  start_time  |  select  start_time,owner,time_spent  #check my hours on 1278 ticket 
+Get-ServiceDeskWorklogs -id 1278  |where  Owner  -Like  "*rupiewicz*"  |Sort-Object  -Property  start_time  |  select  start_time,owner,time_spent  #sprawdź godziny w zgłoszeniu 
 ```
 ```powershell
-Get-ServiceDeskWorklogs -id 1278 |where Owner -Like "*rupiewicz*" | Measure-Object -Property time_spent -su #count my houre on ticket 
+Get-ServiceDeskWorklogs -id 1278 |where Owner -Like "*rupiewicz*" | Measure-Object -Property time_spent -su #Przelicz godziny w zgłoszeniu  
 ```
 # PowerShell Module: ServiceDeskPlus
 PowerShell module focused on manipulating the ManageEngine ServiceDesk Plus API.
