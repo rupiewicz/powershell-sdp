@@ -1,5 +1,9 @@
 Dodany został moduł dotyczący obsługi czasu pracy ( dodawania oraz raportowanie czasu pracy )  - Add TimeSheet module :) 
 
+Dokumentacje dot ServiceDesku API możemy znaleźć tutaj 
+https://www.manageengine.com/products/service-desk/sdpod-v3-api/requests/request.html#get-request
+
+
 Przykładowe zapytania 
 
 ```powershell
