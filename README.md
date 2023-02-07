@@ -1,5 +1,10 @@
 Dodany został moduł dotyczący obsługi czasu pracy ( dodawania oraz raportowanie czasu pracy )  - Add TimeSheet module :) 
 
+Przykładowe zapytania 
+
+1278, 1279, 1280 |Add-ServiceDeskWorklogs -Hours 1 -Owner rupiewicz / add  1hour to id 
+Get-ServiceDeskWorklogs -id 1278  |where  Owner  -Like  "*rupiewicz*"  |Sort-Object  -Property  start_time  |  select  start_time,owner,time_spent  /check my hours on 1278 ticket 
+Get-ServiceDeskWorklogs -id 1278 |where Owner -Like "*rupiewicz*" | Measure-Object -Property time_spent -su /count my houre on ticket 
 
 # PowerShell Module: ServiceDeskPlus
 PowerShell module focused on manipulating the ManageEngine ServiceDesk Plus API.
