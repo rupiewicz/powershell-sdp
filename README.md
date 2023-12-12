@@ -41,3 +41,9 @@ Add your [ServiceDesk Plus](https://www.manageengine.com/products/service-desk/)
 $PSDefaultParameterValues["*-ServiceDesk*:Uri"] = "https://sdp.example.com"
 $PSDefaultParameterValues["*-ServiceDesk*:ApiKey"] = "B42550F3-006D-48EB-8011-F6C7D6323EE7"
 ```
+
+
+Dodanie daty wcześniejszej do modułu add-ServiceDeskWorklog 
+```powershell
+Add-ServiceDeskWorklogs -Id 150354 -Hours 2 -Owner rupiewicz -StartTime 2023-12-04T09:00:00 -EndTime 2023-12-04T11:00:00 -Message test
+```
