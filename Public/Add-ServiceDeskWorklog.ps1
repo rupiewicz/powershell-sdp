@@ -1,60 +1,66 @@
 ﻿function Add-ServiceDeskWorklogs {
     param (
-        # ID of the ServiceDesk Plus request
-        [Parameter(Mandatory, ValueFromPipeline, ValueFromPipelineByPropertyName)]
-        [int[]]
-        $Id,
-
-        # Hours spent on the worklog
         [Parameter(Mandatory)]
-        [int]
-        $Hours,
+        [int]$Id,
 
-        # Owner of the worklog
         [Parameter(Mandatory)]
-        [string]
-        $Owner,
+        [int]$Hours,
 
-        # Base URI of the ServiceDesk Plus server, i.e. https://sdp.example.com
         [Parameter(Mandatory)]
-        $Uri,
+        [string]$Owner,
 
-        # ServiceDesk Plus API key
         [Parameter(Mandatory)]
-        $ApiKey
+        [DateTime]$StartTime,
+
+        [Parameter(Mandatory)]
+        [DateTime]$EndTime,
+
+        [Parameter(Mandatory)]
+        [string]$Uri,
+
+        [Parameter(Mandatory)]
+        [string]$ApiKey,
+
+        [Parameter(Mandatory)]
+        [string]$Message
     )
 
-    begin {
-        $InputData = @{
-            worklog = @{
-                description = $Message
-                time_spent = @{
-                    hours = $Hours
-                }
-                owner = @{
-                    name = $Owner
-                }
+    function ConvertTo-UnixTimeMillis($dateTime) {
+        $epoch = [DateTime]::new(1970, 1, 1, 0, 0, 0, [DateTimeKind]::Utc)
+        return [int64](($dateTime.ToUniversalTime() - $epoch).TotalMilliseconds)
+    }
+
+    $InputData = @{
+        worklog = @{
+            description = $Message
+            time_spent = @{
+                hours = $Hours
+            }
+            owner = @{
+                name = $Owner
+            }
+            start_time = @{
+                value = ConvertTo-UnixTimeMillis $StartTime
+            }
+            end_time = @{
+                value = ConvertTo-UnixTimeMillis $EndTime
             }
         }
     }
 
-    process {
-        foreach ($RequestId in $Id) {
-            $Parameters = @{
-                Body = @{
-                    TECHNICIAN_KEY = $ApiKey
-                    input_data = ($InputData | ConvertTo-Json -Depth 5 -Compress)
-                }
-                Method = "Post"
-                Uri = "$Uri/api/v3/requests/$RequestId/worklogs"
-            }
-
-            $Response = Invoke-RestMethod @Parameters
-
-            [PSCustomObject] @{
-                Id = $Id
-                Message = $Response.response_status.status
-            }
+    $Parameters = @{
+        Body = @{
+            TECHNICIAN_KEY = $ApiKey
+            input_data = ($InputData | ConvertTo-Json -Depth 5 -Compress)
         }
+        Method = "Post"
+        Uri = "$Uri/api/v3/requests/$Id/worklogs"
+    }
+
+    $Response = Invoke-RestMethod @Parameters
+
+    [PSCustomObject] @{
+        Id = $Id
+        Message = $Response.response_status.status
     }
 }
